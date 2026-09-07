@@ -73,4 +73,25 @@
     </select>
 
 
+    <select id="countEmpJobDataList" resultType="java.util.Map">
+        select case
+                   when job = 1 then '班主任'
+                   when job = 2 then '讲师'
+                   when job = 3 then '学工主管'
+                   when job = 4 then '教研主管'
+                   when job = 5 then '咨询师'
+                   else '其他' end pos,
+               count(*)            num
+        from emp
+        group by job;
+    </select>
+
+    <select id="countEmpGenderDataList" resultType="java.util.Map">
+        select case when gender = 1 then '男' when gender = 2 then '女' end name,
+               count(*)                                                     value
+        from emp
+        group by gender;
+    </select>
+
+
 </mapper>
