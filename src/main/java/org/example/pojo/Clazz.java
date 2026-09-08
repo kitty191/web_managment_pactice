@@ -18,6 +18,9 @@ public class Clazz {
     private LocalDate endDate;
     private Integer masterId;
     private Integer subject;
-    private LocalDateTime creatTime;
+    private LocalDateTime createTime;
     private LocalDateTime updateTime;
+
+    private String masterName;
+    private String status;
 }
