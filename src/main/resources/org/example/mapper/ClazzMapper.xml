@@ -4,17 +4,52 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.example.mapper.ClazzMapper">
+    <!--    添加班级数据-->
+    <insert id="insert">
+        insert into clazz(name, room, begin_date, end_date, master_id, subject, create_time, update_time)
+        VALUES (#{name}, #{room}, #{beginDate}, #{endDate}, #{masterId}, #{subject}, #{createTime}, #{updateTime})
+    </insert>
 
+    <!--    更新班级信息-->
+    <update id="updateById">
+        update clazz
+        <set>
+            <if test="name != null and name!=''">name=#{name},</if>
+            <if test="room != null and room !=''">room=#{room},</if>
+            <if test="beginDate!=null ">begin_date=#{beginDate},</if>
+            <if test="endDate != null ">end_date=#{endDate},</if>
+            <if test="masterId != null">master_id=#{masterId},</if>
+            <if test="subject != null">subject=#{subject},</if>
+            update_time=#{updateTime}
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--    根据ID删除班级-->
+    <delete id="delete">
+        delete
+        from clazz
+        where id = #{id}
+    </delete>
+
+    <!--    班级分页查询-->
     <select id="list" resultType="org.example.pojo.Clazz">
         select c.* ,e.name AS masterName
         from clazz c left join emp e on c.master_id=e.id
         <where>
             <if test="name != null and name != ''">
-                and name like concat('%', #{name}, '%')
+                and c.name like concat('%', #{name}, '%')
             </if>
 
         </where>
-        order by update_time desc
+        order by c.update_time desc
+    </select>
+
+    <!--    根据ID查询班级-->
+    <select id="getById" resultType="org.example.pojo.Clazz">
+        select *
+        from clazz
+        where id = #{id}
     </select>
 
 

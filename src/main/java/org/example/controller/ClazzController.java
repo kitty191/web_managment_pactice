@@ -6,9 +6,7 @@ import org.example.pojo.ClazzQueryParam;
 import org.example.pojo.PageResult;
 import org.example.pojo.Result;
 import org.example.service.ClazzService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -28,5 +26,32 @@ public class ClazzController {
         return Result.success(pageResult);
     }
 
+    @DeleteMapping
+    public Result delete(@RequestParam Integer id) {
+        log.info("删除班级:{}", id);
+        clazzService.delete(id);
+        return Result.success();
+    }
+
+    @PostMapping
+    public Result insert(@RequestBody Clazz clazz) {
+        log.info("添加班级:{}", clazz);
+        clazzService.insert(clazz);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    public Result getInfo(@PathVariable Integer id) {
+        log.info("根据ID查询班级:{}", id);
+        Clazz clazz = clazzService.getInfo(id);
+        return Result.success(clazz);
+    }
+
+    @PutMapping
+    public Result update(@RequestBody Clazz clazz) {
+        log.info("修改班级信息:{}", clazz);
+        clazzService.update(clazz);
+        return Result.success();
+    }
 }
 

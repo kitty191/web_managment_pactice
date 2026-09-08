@@ -10,4 +10,11 @@ import java.util.List;
 public interface ClazzMapper {
     List<Clazz> list(ClazzQueryParam clazzQueryParam);
 
+    void delete(Integer id);
+
+    void insert(Clazz clazz);
+
+    Clazz getById(Integer id);
+
+    void updateById(Clazz clazz);
 }
