@@ -1,12 +1,15 @@
 package org.example.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.mapper.ClazzMapper;
 import org.example.pojo.Clazz;
 import org.example.pojo.ClazzQueryParam;
 import org.example.pojo.PageResult;
 import org.example.pojo.Result;
 import org.example.service.ClazzService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -52,6 +55,13 @@ public class ClazzController {
         log.info("修改班级信息:{}", clazz);
         clazzService.update(clazz);
         return Result.success();
+    }
+
+    @GetMapping("/list")
+    public Result findAll() {
+        log.info("查询所有班级");
+        List<Clazz> list = clazzService.findAll();
+        return Result.success(list);
     }
 }
 

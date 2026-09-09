@@ -124,4 +124,9 @@ public class ClazzServiceImpl implements ClazzService {
 
         clazzMapper.updateById(clazz);
     }
+
+    @Override
+    public List<Clazz> findAll() {
+        return clazzMapper.findAll();
+    }
 }

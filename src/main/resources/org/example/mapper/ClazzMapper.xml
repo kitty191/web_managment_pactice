@@ -52,5 +52,10 @@
         where id = #{id}
     </select>
 
+    <select id="findAll" resultType="org.example.pojo.Clazz">
+        select *
+        from clazz
+    </select>
+
 
 </mapper>
