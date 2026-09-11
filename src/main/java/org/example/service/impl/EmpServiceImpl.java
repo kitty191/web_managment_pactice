@@ -3,6 +3,8 @@ package org.example.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.ognl.enhance.OgnlLocalReference;
 import org.example.mapper.EmpExprMapper;
 import org.example.mapper.EmpMapper;
 import org.example.pojo.*;
@@ -15,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 @Service
 public class EmpServiceImpl implements EmpService {
 
@@ -95,6 +98,18 @@ public class EmpServiceImpl implements EmpService {
             exprList.forEach(empExpr -> empExpr.setEmpId(emp.getId()));
             empExprmapper.insertBatch(exprList);
         }
+    }
+
+    @Override
+    public LoginInfo login(Emp emp) {
+        Emp e = empMapper.selectByUsernameAndPassword(emp);
+
+        if (e != null) {
+            LoginInfo loginInfo = new LoginInfo(e.getId(), e.getUsername(), e.getName(), "");
+            log.info("登陆成功，员工信息；{}", loginInfo);
+            return loginInfo;
+        }
+        return null;
     }
 
 

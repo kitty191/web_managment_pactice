@@ -93,5 +93,12 @@
         group by gender;
     </select>
 
+    <select id="selectByUsernameAndPassword" resultType="org.example.pojo.Emp">
+        select id, username, name
+        from emp
+        where username = #{username}
+          and password = #{password}
+    </select>
+
 
 </mapper>
