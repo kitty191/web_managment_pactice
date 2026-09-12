@@ -1,5 +1,6 @@
 package org.example.interceptor;
 
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,9 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         //校验token
         try {
-            JwtUtils.parseToken(token);
+            Claims claims = JwtUtils.parseToken(token);
+            Number id = (Number) claims.get("id");
+            request.setAttribute("operateEmpId", id.intValue());
         } catch (Exception e) {
             log.info("令牌非法，响应401");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

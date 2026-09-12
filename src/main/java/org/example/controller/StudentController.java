@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.anno.Log;
 import org.example.pojo.PageResult;
 import org.example.pojo.Result;
 import org.example.pojo.Student;
@@ -27,6 +28,7 @@ public class StudentController {
         return Result.success(pageResult);
     }
 
+    @Log
     @DeleteMapping("/{ids}")
     public Result delete(@PathVariable List<Integer> ids) {
         log.info("删除学员数据:{}", ids);
@@ -34,6 +36,7 @@ public class StudentController {
         return Result.success();
     }
 
+    @Log
     @PostMapping
     public Result insert(@RequestBody Student student) {
         log.info("添加学员:{}", student);
@@ -48,6 +51,7 @@ public class StudentController {
         return Result.success(student);
     }
 
+    @Log
     @PutMapping
     public Result update(@RequestBody Student student) {
         log.info("修改学员信息：{}", student);
@@ -55,6 +59,7 @@ public class StudentController {
         return Result.success();
     }
 
+    @Log
     @PutMapping("/violation/{id}/{score}")
     public Result violation(@PathVariable Integer id, @PathVariable Integer score) {
         log.info("记录学员违纪信息:{},{}", id, score);

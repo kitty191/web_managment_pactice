@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.anno.Log;
 import org.example.pojo.Dept;
 import org.example.pojo.Result;
 import org.example.service.DeptService;
@@ -32,6 +33,7 @@ public class DeptController {
     /**
      * 删除
      */
+    @Log
     @DeleteMapping
     public Result delete(Integer id) {
         deptService.deleteById(id);
@@ -41,6 +43,7 @@ public class DeptController {
     /**
      * 添加
      */
+    @Log
     @PostMapping
     public Result add(@RequestBody Dept dept) {
         deptService.add(dept);
@@ -59,6 +62,7 @@ public class DeptController {
     /**
      * 修改部门
      */
+    @Log
     @PutMapping
     public Result update(@RequestBody Dept dept) {
         deptService.update(dept);
