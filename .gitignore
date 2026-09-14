@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### macOS / Codex ###
+.DS_Store
+.codex/
+
+# Log files
+*.log
